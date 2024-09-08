@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penilaian Mata Kuliah Pemrograman Internet</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Script Nilai Pemrograman Internet</h2>
+        <form method="POST" action="">
+            <label for="nama">Nama:</label><br>
+            <input type="text" id="nama" name="nama" required><br><br>
+
+            <label for="nim">NIM:</label><br>
+            <input type="text" id="nim" name="nim" required><br><br>
+
+            <label for="nilai">Nilai (0-100):</label><br>
+            <input type="number" id="nilai" name="nilai" min="0" max="100" required><br><br>
+
+            <input type="submit" name="submit" value="Submit">
+        </form>
+
+        <?php
+        if (isset($_POST['submit'])) {
+            $nama = $_POST['nama'];
+            $nim = $_POST['nim'];
+            $nilai = $_POST['nilai'];
+            $grade = "";
+
+            if ($nilai >= 85) {
+                $grade = "A";
+            } elseif ($nilai >= 80) {
+                $grade = "B+";
+            } elseif ($nilai >= 75) {
+                $grade = "B";
+            } elseif ($nilai >= 70) {
+                $grade = "C+";
+            } elseif ($nilai >= 65) {
+                $grade = "C";
+            } elseif ($nilai >= 50) {
+                $grade = "D";
+            } else {
+                $grade = "E";
+            }
+
+            echo "<h3>Hasil Penilaian:</h3>";
+            echo "Nama: $nama<br>";
+            echo "NIM: $nim<br>";
+            echo "Nilai Angka: $nilai<br>";
+            echo "Nilai Huruf: $grade<br>";
+        }
+        ?>
+    </div>
+</body>
+</html>
