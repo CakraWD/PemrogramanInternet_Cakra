@@ -37,6 +37,18 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -44,13 +56,13 @@
         <h2>Script Nilai Pemrograman Internet</h2>
         <form method="POST" action="">
             <label for="nama">Nama:</label><br>
-            <input type="text" id="nama" name="nama" required><br><br>
+            <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda" required><br><br>
 
             <label for="nim">NIM:</label><br>
-            <input type="text" id="nim" name="nim" required><br><br>
+            <input type="text" id="nim" name="nim" placeholder="Masukkan NIM Anda" required><br><br>
 
             <label for="nilai">Nilai (0-100):</label><br>
-            <input type="number" id="nilai" name="nilai" min="0" max="100" required><br><br>
+            <input type="number" id="nilai" name="nilai" placeholder="Masukkan nilai Anda" min="0" max="100" required><br><br>
 
             <input type="submit" name="submit" value="Submit">
         </form>
@@ -79,10 +91,15 @@
             }
 
             echo "<h3>Hasil Penilaian:</h3>";
-            echo "Nama: $nama<br>";
-            echo "NIM: $nim<br>";
-            echo "Nilai Angka: $nilai<br>";
-            echo "Nilai Huruf: $grade<br>";
+            echo "<table>";
+            echo "<tr><th>Nama</th><th>NIM</th><th>Nilai Angka</th><th>Nilai Huruf</th></tr>";
+            echo "<tr>";
+            echo "<td>$nama</td>";
+            echo "<td>$nim</td>";
+            echo "<td>$nilai</td>";
+            echo "<td>$grade</td>";
+            echo "</tr>";
+            echo "</table>";
         }
         ?>
     </div>
