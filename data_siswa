@@ -1,0 +1,56 @@
+<?php
+$siswa = [
+    ["nama" => "Andi", "matematika" => 85, "bahasa_inggris" => 70, "ipa" => 80],
+    ["nama" => "Budi", "matematika" => 60, "bahasa_inggris" => 50, "ipa" => 65],
+    ["nama" => "Cici", "matematika" => 75, "bahasa_inggris" => 80, "ipa" => 70],
+    ["nama" => "Dodi", "matematika" => 95, "bahasa_inggris" => 85, "ipa" => 90],
+    ["nama" => "Eka", "matematika" => 50, "bahasa_inggris" => 60, "ipa" => 55]
+];
+
+$total_lulus = 0;
+$total_tidak_lulus = 0;
+
+echo "<h2>Daftar Nilai Siswa</h2>";
+echo "<table border='1' cellpadding='10' cellspacing='0' style='border-collapse: collapse;'>";
+echo "<tr>
+        <th>Nama</th>
+        <th>Rata-rata</th>
+        <th>Status</th>
+        <th>Mata Pelajaran yang Harus Diperbaiki (Jika Tidak Lulus)</th>
+      </tr>";
+
+foreach ($siswa as $data) {
+    $rata_rata = ($data['matematika'] + $data['bahasa_inggris'] + $data['ipa']) / 3;
+    $rata_rata = round($rata_rata, 2);
+
+    if ($rata_rata >= 75) {
+        $status = "Lulus";
+        $total_lulus++;
+        $mata_pembetulan = "-";
+    } else {
+        $status = "Tidak Lulus";
+        $total_tidak_lulus++;
+
+        $nilai_terendah = min($data['matematika'], $data['bahasa_inggris'], $data['ipa']);
+        if ($nilai_terendah == $data['matematika']) {
+            $mata_pembetulan = "Matematika";
+        } elseif ($nilai_terendah == $data['bahasa_inggris']) {
+            $mata_pembetulan = "Bahasa Inggris";
+        } else {
+            $mata_pembetulan = "IPA";
+        }
+    }
+
+    echo "<tr>
+            <td>{$data['nama']}</td>
+            <td>{$rata_rata}</td>
+            <td>{$status}</td>
+            <td>{$mata_pembetulan}</td>
+          </tr>";
+}
+
+echo "</table>";
+
+echo "<h3>Jumlah Total Siswa</h3>";
+echo "<p>Total Lulus: $total_lulus</p>";
+echo "<p>Total Tidak Lulus: $total_tidak_lulus</p>";
