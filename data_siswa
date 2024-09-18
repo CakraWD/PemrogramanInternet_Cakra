@@ -10,13 +10,61 @@ $siswa = [
 $total_lulus = 0;
 $total_tidak_lulus = 0;
 
-echo "<h2>Daftar Nilai Siswa</h2>";
-echo "<table border='1' cellpadding='10' cellspacing='0' style='border-collapse: collapse;'>";
+echo "<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h2, h3 {
+            color: #4CAF50;
+        }
+        table {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        table th, table td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+        table th {
+            background-color: #4CAF50;
+            color: white;
+            text-transform: uppercase;
+        }
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        table tr:hover {
+            background-color: #ddd;
+        }
+        table td {
+            border-bottom: 1px solid #ddd;
+        }
+        .status-lulus {
+            color: green;
+            font-weight: bold;
+        }
+        .status-tidak-lulus {
+            color: red;
+            font-weight: bold;
+        }
+        p {
+            text-align: center;
+            font-size: 18px;
+        }
+      </style>";
+
+echo "<h2 style='text-align:center;'>Daftar Nilai Siswa</h2>";
+echo "<table border='1' cellpadding='10' cellspacing='0'>";
 echo "<tr>
         <th>Nama</th>
         <th>Rata-rata</th>
         <th>Status</th>
-        <th>Mata Pelajaran yang Harus Diperbaiki (Jika Tidak Lulus)</th>
+        <th>Mata Pelajaran yang Harus Diperbaiki</th>
       </tr>";
 
 foreach ($siswa as $data) {
@@ -24,11 +72,11 @@ foreach ($siswa as $data) {
     $rata_rata = round($rata_rata, 2);
 
     if ($rata_rata >= 75) {
-        $status = "Lulus";
+        $status = "<span class='status-lulus'>Lulus</span>";
         $total_lulus++;
         $mata_pembetulan = "-";
     } else {
-        $status = "Tidak Lulus";
+        $status = "<span class='status-tidak-lulus'>Tidak Lulus</span>";
         $total_tidak_lulus++;
 
         $nilai_terendah = min($data['matematika'], $data['bahasa_inggris'], $data['ipa']);
@@ -51,6 +99,7 @@ foreach ($siswa as $data) {
 
 echo "</table>";
 
-echo "<h3>Jumlah Total Siswa</h3>";
+echo "<h3 style='text-align:center;'>Jumlah Total Siswa</h3>";
 echo "<p>Total Lulus: $total_lulus</p>";
 echo "<p>Total Tidak Lulus: $total_tidak_lulus</p>";
+?>
