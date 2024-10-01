@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Penyalaan AC</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #555;
+            text-align: left;
+        }
+
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .result p {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .result h2 {
+            font-size: 20px;
+            color: #4CAF50;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            input[type="number"] {
+                font-size: 14px;
+            }
+
+            input[type="submit"] {
+                font-size: 14px;
+            }
+
+            .result p {
+                font-size: 16px;
+            }
+
+            .result h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sistem Penyalaan AC</h1>
+    
+        <form method="POST">
+            <label for="suhu">Suhu (°C):</label>
+            <input type="number" id="suhu" name="suhu" required>
+        
+            <label for="kelembaban">Kelembaban (%):</label>
+            <input type="number" id="kelembaban" name="kelembaban" required>
+
+            <input type="submit" value="Cek Status AC">
+        </form>
+
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $suhu = $_POST['suhu'];
+            $kelembaban = $_POST['kelembaban'];
+
+            $suhu_sangat_rendah = 20;
+            $suhu_rendah = 25;
+            $suhu_sedang = 30;
+
+            $kelembaban_rendah = 40;
+            $kelembaban_sedang = 60;
+
+            if ($suhu < 20 && $kelembaban < 40) {
+                $status_ac = "AC Mati";
+            } elseif ($suhu >= 20 && $suhu < 25 && $kelembaban >= 40 && $kelembaban < 60) {
+                $status_ac = "AC Menyala Rendah";
+            } elseif ($suhu >= 25 && $suhu < 30 && $kelembaban >= 60 && $kelembaban < 80) {
+                $status_ac = "AC Menyala Sedang";
+            } elseif ($suhu >= 30 || $kelembaban >= 80) {
+                $status_ac = "AC Menyala Berat";
+            } else {
+                $status_ac = "Data tidak valid";
+            }
+            
+            echo "<div class='result'>";
+            echo "<h2>Hasil:</h2>";
+            echo "<p>Suhu : " . $suhu . "°C</p>";
+            echo "<p>Kelembaban : " . $kelembaban . "%</p>";
+            echo "<p>Status AC : " . $status_ac . "</p>";
+            echo "</div>";
+        }
+        ?>
+    </div>
+</body>
+</html>
