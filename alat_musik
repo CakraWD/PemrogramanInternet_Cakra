@@ -1,3 +1,4 @@
+(File Tugas4.php)
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -234,3 +235,40 @@
 
 </body>
 </html>
+
+(File Kendang.php)
+<?php
+class Kendang {
+    public function caraMain() {
+        return "Kendang dimainkan dengan cara dipukul, ";
+    }
+}
+?>
+(File Biola.php)
+<?php
+class Biola {
+    public function caraMain() {
+        return "Biola dimainkan dengan cara digesek";
+    }
+}
+?>
+(File Asus.php)
+<?php
+namespace laptop;
+
+class Asus {
+    public function getlaptopType() {
+        return "Laptop dengan merk Asus, ";
+    }
+}
+?>
+(File Lenovo.php)
+<?php
+namespace laptop;
+
+class Asus {
+    public function getlaptopType() {
+        return "Laptop dengan merk Asus, ";
+    }
+}
+?>
